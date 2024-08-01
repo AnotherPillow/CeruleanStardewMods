@@ -3,8 +3,8 @@
     <PropertyGroup>
         <AssemblyName>MultipleSpouseDialog</AssemblyName>
         <RootNamespace>MultipleSpouseDialog</RootNamespace>
-        <Version>1.2.4</Version>
-        <TargetFramework>net5.0</TargetFramework>
+        <Version>1.2.5-unofficial.1-AnotherPillow</Version>
+        <TargetFramework>net6.0</TargetFramework>
         <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     </PropertyGroup>
 
@@ -12,7 +12,7 @@
         <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.0.1" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta1" />
         <Reference Include="ContentPatcher">
-            <HintPath>/Users/mab/Library/Application Support/Steam/steamapps/common/Stardew Valley/Contents/MacOS/Mods/ContentPatcher/ContentPatcher.dll</HintPath>
+            <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Stardew Valley\Mods\ContentPatcher\ContentPatcher.dll</HintPath>
             <Private>False</Private>
         </Reference>
     </ItemGroup>

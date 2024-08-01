@@ -24,7 +24,7 @@ namespace MultipleSpouseDialog
             if (ModEntry.config.ExtraDebugOutput)
                 M.Log($"Eligible(): checking for {npc1.Name} {npc2.Name}", LogLevel.Debug);
 
-            var distance = Vector2.Distance(npc1.position, npc2.position);
+            var distance = Vector2.Distance(npc1.position.Get(), npc2.position.Get());
             var roll = ModEntry.myRand.NextDouble();
             var lucky = roll < ModEntry.config.SpouseChatChance;
             var already = chattingSpouses.Contains(npc1.Name) || chattingSpouses.Contains(npc2.Name);
@@ -73,7 +73,7 @@ namespace MultipleSpouseDialog
 
         private static bool Eligible(NPC npc1, Farmer npc2)
         {
-            var distance = Vector2.Distance(npc1.position, npc2.position);
+            var distance = Vector2.Distance(npc1.position.Get(), npc2.position.Get());
             var roll = ModEntry.myRand.NextDouble();
             var lucky = roll < ModEntry.config.SpouseChatChance;
             var already = chattingSpouses.Contains(npc1.Name) || chattingSpouses.Contains(npc2.Name);
@@ -135,8 +135,8 @@ namespace MultipleSpouseDialog
                         $"Chatting: {npc1.Name} (faces {npc1.facingDirection}) {owner.Name} (faces {owner.facingDirection})",
                         LogLevel.Debug);
                 lastChatTime = 0;
-                int npc1face = npc1.facingDirection;
-                int npc2face = owner.facingDirection;
+                int npc1face = npc1.facingDirection.Get();
+                int npc2face = owner.facingDirection.Get();
 
                 PerformChat(npc1, owner);
 
@@ -188,8 +188,8 @@ namespace MultipleSpouseDialog
                             ModEntry.PMonitor.Log(
                                 $"Chatting: {npc1.Name} (faces {npc1.facingDirection}) {npc2.Name} (faces {npc2.facingDirection})", LogLevel.Debug);
                         lastChatTime = 0;
-                        int npc1face = npc1.facingDirection;
-                        int npc2face = npc2.facingDirection;
+                        int npc1face = npc1.facingDirection.Get();
+                        int npc2face = npc2.facingDirection.Get();
 
                         PerformChat(npc1, npc2);
 
@@ -247,13 +247,13 @@ namespace MultipleSpouseDialog
             const int delay = 2000;
 
             caller.faceDirection(caller_face_left ? 3 : 1);
-            caller.showTextAboveHead($"{call}", -1, 2, delay);
+            caller.showTextAboveHead($"{call}", null, 2, delay);
             caller.Sprite.UpdateSourceRect();
 
             if (responder is NPC rn)
             {
                 rn.faceDirection(3);
-                rn.showTextAboveHead($"{response}", -1, 2, delay, delay);
+                rn.showTextAboveHead($"{response}", null, 2, delay, delay);
                 rn.Sprite.UpdateSourceRect();
 
                 caller.movementPause = delay * 2;

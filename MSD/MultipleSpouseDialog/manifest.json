@@ -1,11 +1,11 @@
 ﻿{
   "Name": "Multiple Spouse Dialogs",
   "Author": "ceruleandeep",
-  "Version": "1.2.4",
+  "Version": "1.2.5-unofficial.1-AnotherPillow",
   "Description": "Cute conversations between spouses",
   "UniqueID": "ceruleandeep.multiplespousedialogs",
   "EntryDll": "MultipleSpouseDialog.dll",
-  "MinimumApiVersion": "3.0.0",
+  "MinimumApiVersion": "4.0.0",
   "UpdateKeys": [ "Nexus:8711" ],
   "Dependencies": [
     {

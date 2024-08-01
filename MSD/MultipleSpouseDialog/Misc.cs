@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using StardewModdingAPI;
 using StardewValley;
+using StardewValley.GameData.Characters;
+using StardewValley.Characters;
 
 // cut down from the original in Multiple Spouses
 // https://github.com/aedenthorn/StardewValleyMods/blob/master/MultipleSpouses/Misc.cs
@@ -58,22 +60,30 @@ namespace MultipleSpouseDialog
         public static void SetNPCRelations()
         {
             relationships.Clear();
-            var NPCDispositions =
-                Helper.GameContent.Load<Dictionary<string, string>>("Data\\NPCDispositions");
-            foreach (var (key, value) in NPCDispositions)
+            var Characters =
+                Helper.GameContent.Load<Dictionary<string, CharacterData>>("Data\\Characters");
+            foreach (var (key, value) in Characters)
             {
-                var relations = value.Split('/')[9].Split(' ');
-                if (relations.Length <= 0) continue;
+                Dictionary<string, string> relations = value.FriendsAndFamily;
+                if (relations.Count <= 0) continue;
+
                 relationships.Add(key, new Dictionary<string, string>());
-                for (var i = 0; i < relations.Length; i += 2)
+                
+                foreach (var (rkey, rvalue) in relations)
+                {
                     try
                     {
-                        relationships[key].Add(relations[i], relations[i + 1].Replace("'", ""));
+                        string localisedPath = rvalue.Replace("[LocalizedText ", "").Replace("]", "");
+                        string resolvedText = Game1.content.LoadStringReturnNullIfNotFound("Strings\\Characters:Relative_Sister");
+                        if (resolvedText is null) continue;
+                        relationships[key].Add(rkey, resolvedText);
                     }
                     catch (Exception)
                     {
                         // ignored
                     }
+                }
+                    
             }
         }
 
